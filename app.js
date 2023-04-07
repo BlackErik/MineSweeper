@@ -8,6 +8,7 @@ var app = new Vue({
     mine_positions_text: "",
     clicked_tiles: [],
     flagged_tiles: [],
+    number_tiles: [],
   },
   methods: {
     tileClick: function (index1, index2) {
@@ -24,6 +25,9 @@ var app = new Vue({
       let tile_flagged = `x${index1 + 1}y${index2 + 1}`;
       if (!this.flagged_tiles.includes(tile_flagged)) {
         this.flagged_tiles.push(tile_flagged);
+      } else {
+        let existingFlag = this.flagged_tiles.indexOf(tile_flagged);
+        this.flagged_tiles.splice(existingFlag, 1);
       }
       console.log(`flagged tiles: ${this.flagged_tiles}`);
     },
@@ -121,6 +125,11 @@ var app = new Vue({
         adjacent_mines++;
       }
       // console.log(`tile ${tile_pos} has ${adjacent_mines} adjacent mines`);
+      if (adjacent_mines > 0) {
+        if (!this.number_tiles.includes(tile_pos)) {
+          this.number_tiles.push(tile_pos);
+        }
+      }
       return adjacent_mines;
     },
 
@@ -142,6 +151,7 @@ var app = new Vue({
       this.mine_positions = [];
       this.clicked_tiles = [];
       this.flagged_tiles = [];
+      this.number_tiles = [];
       this.mine_positions_text = "";
       this.generateMines();
       this.populateTileWithMine();
