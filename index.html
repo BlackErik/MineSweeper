@@ -11,12 +11,13 @@
           <div
             class="tile-background"
             v-for="(height, index2) in height_of_board"
-            @click="(testClick(index1, index2))"
+            @click="(tileClick(index1, index2))"
           >
             <div class="mine" v-if="populateTileWithMine(index1,index2)"></div>
             <h1 v-if="populateTileWithNumber(index1, index2)">
               {{populateTileWithNumber(index1,index2)}}
             </h1>
+            <div class="tile-cover" v-if="tileCovered(index1, index2)"></div>
           </div>
         </div>
       </div>

@@ -6,10 +6,15 @@ var app = new Vue({
     num_of_mines: 10,
     mine_positions: [],
     mine_positions_text: "",
+    clicked_tiles: [],
   },
   methods: {
-    testClick: function (index1, index2) {
-      console.log(`X: ${index1 + 1}, Y: ${index2 + 1}`);
+    tileClick: function (index1, index2) {
+      let tile_clicked = `x${index1 + 1}y${index2 + 1}`;
+      if (!this.clicked_tiles.includes(tile_clicked)) {
+        this.clicked_tiles.push(tile_clicked);
+      }
+      console.log(`clicked tiles: ${this.clicked_tiles}`);
     },
 
     generateMines: function () {
@@ -33,7 +38,7 @@ var app = new Vue({
           i++;
         }
       }
-      console.log(mines);
+      console.log(`mines: ${mines}`);
       for (i in mines) {
         let y = mines[i].indexOf("y");
         var x_pos = mines[i].slice(1, y);
@@ -108,8 +113,17 @@ var app = new Vue({
       return adjacent_mines;
     },
 
+    tileCovered: function (index1, index2) {
+      let tile_pos = `x${index1 + 1}y${index2 + 1}`;
+      if (!this.clicked_tiles.includes(tile_pos)) {
+        return true;
+      }
+    },
+
     startGame: function () {
       this.mine_positions = [];
+      this.clicked_tiles = [];
+      this.mine_positions_text = [];
       this.generateMines();
       this.populateTileWithMine();
       this.populateTileWithNumber();

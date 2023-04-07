@@ -23,12 +23,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .mine {
   width: 10px;
   height: 10px;
   background-color: red;
+}
+
+.tile-cover {
+  width: 40px;
+  height: 40px;
+  background-color: lightgrey;
+  position: absolute;
 }
 
 #button-container {
