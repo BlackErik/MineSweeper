@@ -60,7 +60,52 @@ var app = new Vue({
     populateTileWithNumber: function (index1, index2) {
       let tile_x = index1 + 1;
       let tile_y = index2 + 1;
+
       var adjacent_mines = 0;
+
+      let tile_pos = `x${tile_x}y${tile_y}`;
+
+      if (this.mine_positions_text.includes(tile_pos)) {
+        return;
+      }
+
+      let tile_pos_1 = `x${tile_x - 1}y${tile_y - 1}`;
+      let tile_pos_2 = `x${tile_x}y${tile_y - 1}`;
+      let tile_pos_3 = `x${tile_x + 1}y${tile_y - 1}`;
+
+      let tile_pos_4 = `x${tile_x - 1}y${tile_y}`;
+      let tile_pos_5 = `x${tile_x + 1}y${tile_y}`;
+
+      let tile_pos_6 = `x${tile_x - 1}y${tile_y + 1}`;
+      let tile_pos_7 = `x${tile_x}y${tile_y + 1}`;
+      let tile_pos_8 = `x${tile_x + 1}y${tile_y + 1}`;
+
+      if (this.mine_positions_text.includes(tile_pos_1)) {
+        adjacent_mines++;
+      }
+      if (this.mine_positions_text.includes(tile_pos_2)) {
+        adjacent_mines++;
+      }
+      if (this.mine_positions_text.includes(tile_pos_3)) {
+        adjacent_mines++;
+      }
+      if (this.mine_positions_text.includes(tile_pos_4)) {
+        adjacent_mines++;
+      }
+      if (this.mine_positions_text.includes(tile_pos_5)) {
+        adjacent_mines++;
+      }
+      if (this.mine_positions_text.includes(tile_pos_6)) {
+        adjacent_mines++;
+      }
+      if (this.mine_positions_text.includes(tile_pos_7)) {
+        adjacent_mines++;
+      }
+      if (this.mine_positions_text.includes(tile_pos_8)) {
+        adjacent_mines++;
+      }
+      // console.log(`tile ${tile_pos} has ${adjacent_mines} adjacent mines`);
+      return adjacent_mines;
     },
 
     startGame: function () {

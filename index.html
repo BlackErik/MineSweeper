@@ -14,7 +14,9 @@
             @click="(testClick(index1, index2))"
           >
             <div class="mine" v-if="populateTileWithMine(index1,index2)"></div>
-            <h1 v-if="populateTileWithNumber(index1, index2) === 1">1</h1>
+            <h1 v-if="populateTileWithNumber(index1, index2)">
+              {{populateTileWithNumber(index1,index2)}}
+            </h1>
           </div>
         </div>
       </div>
