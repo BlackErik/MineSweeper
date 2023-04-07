@@ -13,7 +13,10 @@ var app = new Vue({
   methods: {
     tileClick: function (index1, index2) {
       let tile_clicked = `x${index1 + 1}y${index2 + 1}`;
-      if (!this.clicked_tiles.includes(tile_clicked)) {
+      if (
+        !this.clicked_tiles.includes(tile_clicked) &&
+        !this.flagged_tiles.includes(tile_clicked)
+      ) {
         this.clicked_tiles.push(tile_clicked);
       }
       console.log(`clicked tiles: ${this.clicked_tiles}`);
