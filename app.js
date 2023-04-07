@@ -5,6 +5,7 @@ var app = new Vue({
     width_of_board: 10,
     num_of_mines: 10,
     mine_positions: [],
+    mine_positions_text: "",
   },
   methods: {
     testClick: function (index1, index2) {
@@ -12,11 +13,34 @@ var app = new Vue({
     },
 
     generateMines: function () {
-      for (let i = 0; i < this.num_of_mines; i++) {
+      var mines = [];
+      var i = 0;
+      var mine = [];
+      while (i < this.num_of_mines) {
         let width = Math.floor(Math.random() * this.width_of_board) + 1;
         let height = Math.floor(Math.random() * this.height_of_board) + 1;
-        this.mine_positions.push({ mine_x: width, mine_y: height });
+        mine = `x${width}y${height}`;
+        console.log("mine " + mine);
+        if (mines.length != 0) {
+          if (mines.includes(mine)) {
+            console.log("this mine is equal to an already created mine");
+          } else {
+            mines.push(mine);
+            i++;
+          }
+        } else {
+          mines.push(mine);
+          i++;
+        }
       }
+      console.log(mines);
+      for (i in mines) {
+        let y = mines[i].indexOf("y");
+        var x_pos = mines[i].slice(1, y);
+        var y_pos = mines[i].slice(y + 1);
+        this.mine_positions.push({ mine_x: x_pos, mine_y: y_pos });
+      }
+      this.mine_positions_text = mines;
     },
 
     // v-if index1,index2 is equal to the position of any mine, show mine
@@ -27,18 +51,23 @@ var app = new Vue({
           this.mine_positions[i].mine_x == index1 + 1 &&
           this.mine_positions[i].mine_y == index2 + 1
         ) {
-          console.log("mine HERE");
           return true;
-        } else {
-          console.log("mine NOT HERE");
         }
       }
       return false;
     },
+
+    populateTileWithNumber: function (index1, index2) {
+      let tile_x = index1 + 1;
+      let tile_y = index2 + 1;
+      var adjacent_mines = 0;
+    },
+
     startGame: function () {
       this.mine_positions = [];
       this.generateMines();
       this.populateTileWithMine();
+      this.populateTileWithNumber();
     },
   },
 });
