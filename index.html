@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MineSweeper</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div class="board-background">
+        <div class="test1" v-for="(width, index1) in width_of_board">
+          <div
+            class="test2"
+            v-for="(height, index2) in height_of_board"
+            @click="(testClick(index1, index2))"
+          >
+            <div class="mine" v-if="populateTileWithMine(index1,index2)"></div>
+          </div>
+        </div>
+      </div>
+      <div id="button-container">
+        <button @click="startGame()">Start Game</button>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

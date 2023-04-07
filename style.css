@@ -1,0 +1,39 @@
+.board-background {
+  background-color: grey;
+  height: 500px;
+  width: 500px;
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .test1 {
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  margin: 5px;
+} */
+
+.test2 {
+  width: 40px;
+  height: 40px;
+  background-color: blue;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mine {
+  width: 10px;
+  height: 10px;
+  background-color: red;
+}
+
+#button-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
