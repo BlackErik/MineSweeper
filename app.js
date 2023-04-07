@@ -7,6 +7,7 @@ var app = new Vue({
     mine_positions: [],
     mine_positions_text: "",
     clicked_tiles: [],
+    flagged_tiles: [],
   },
   methods: {
     tileClick: function (index1, index2) {
@@ -15,6 +16,16 @@ var app = new Vue({
         this.clicked_tiles.push(tile_clicked);
       }
       console.log(`clicked tiles: ${this.clicked_tiles}`);
+    },
+
+    tileRightClick: function (index1, index2, e) {
+      e.preventDefault();
+      console.log("rightclicked");
+      let tile_flagged = `x${index1 + 1}y${index2 + 1}`;
+      if (!this.flagged_tiles.includes(tile_flagged)) {
+        this.flagged_tiles.push(tile_flagged);
+      }
+      console.log(`flagged tiles: ${this.flagged_tiles}`);
     },
 
     generateMines: function () {
@@ -120,10 +131,18 @@ var app = new Vue({
       }
     },
 
+    tileFlagged: function (index1, index2) {
+      let tile_pos = `x${index1 + 1}y${index2 + 1}`;
+      if (this.flagged_tiles.includes(tile_pos)) {
+        return true;
+      }
+    },
+
     startGame: function () {
       this.mine_positions = [];
       this.clicked_tiles = [];
-      this.mine_positions_text = [];
+      this.flagged_tiles = [];
+      this.mine_positions_text = "";
       this.generateMines();
       this.populateTileWithMine();
       this.populateTileWithNumber();
