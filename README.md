@@ -2,7 +2,7 @@
 
 TODO :
 
-figure out logic for uncovering large spaces on click instead of just one square
+revise logic for uncovering large spaces on click instead of just one square
 
 no mines on first click
 

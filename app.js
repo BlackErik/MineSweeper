@@ -1,14 +1,15 @@
 var app = new Vue({
   el: "#app",
   data: {
-    height_of_board: 10,
-    width_of_board: 10,
-    num_of_mines: 10,
+    height_of_board: 15,
+    width_of_board: 15,
+    num_of_mines: 30,
     mine_positions: [],
     mine_positions_text: "",
     clicked_tiles: [],
     flagged_tiles: [],
     number_tiles: [],
+    covered_tiles: [],
   },
   methods: {
     tileClick: function (index1, index2) {
@@ -20,6 +21,133 @@ var app = new Vue({
         this.clicked_tiles.push(tile_clicked);
       }
       console.log(`clicked tiles: ${this.clicked_tiles}`);
+
+      let tile_x = index1 + 1;
+      let tile_y = index2 + 1;
+
+      this.adjacentTileCheck(tile_x, tile_y);
+    },
+
+    adjacentTileCheck: function (tile_x, tile_y) {
+      if (
+        tile_x >= 0 &&
+        tile_x <= this.width_of_board &&
+        tile_y >= 0 &&
+        tile_y <= this.height_of_board
+      ) {
+        let tile_pos = `x${tile_x}y${tile_y}`;
+        if (
+          !this.number_tiles.includes(tile_pos) &&
+          !this.mine_positions_text.includes(tile_pos)
+        ) {
+          let tile_pos_1 = `x${tile_x - 1}y${tile_y - 1}`;
+          let tile_pos_2 = `x${tile_x}y${tile_y - 1}`;
+          let tile_pos_3 = `x${tile_x + 1}y${tile_y - 1}`;
+
+          let tile_pos_4 = `x${tile_x - 1}y${tile_y}`;
+          let tile_pos_5 = `x${tile_x + 1}y${tile_y}`;
+
+          let tile_pos_6 = `x${tile_x - 1}y${tile_y + 1}`;
+          let tile_pos_7 = `x${tile_x}y${tile_y + 1}`;
+          let tile_pos_8 = `x${tile_x + 1}y${tile_y + 1}`;
+
+          if (
+            !this.clicked_tiles.includes(tile_pos_1) &&
+            !this.flagged_tiles.includes(tile_pos_1) &&
+            !this.mine_positions_text.includes(tile_pos_1)
+          ) {
+            let y = tile_pos_1.indexOf("y");
+            let x_pos = tile_pos_1.slice(1, y);
+            let y_pos = tile_pos_1.slice(y + 1);
+            this.clicked_tiles.push(tile_pos_1);
+            this.adjacentTileCheck(x_pos, y_pos);
+          }
+
+          if (
+            !this.clicked_tiles.includes(tile_pos_2) &&
+            !this.flagged_tiles.includes(tile_pos_2) &&
+            !this.mine_positions_text.includes(tile_pos_2)
+          ) {
+            let y = tile_pos_2.indexOf("y");
+            let x_pos = tile_pos_2.slice(1, y);
+            let y_pos = tile_pos_2.slice(y + 1);
+            this.clicked_tiles.push(tile_pos_2);
+            this.adjacentTileCheck(x_pos, y_pos);
+          }
+
+          if (
+            !this.clicked_tiles.includes(tile_pos_3) &&
+            !this.flagged_tiles.includes(tile_pos_3) &&
+            !this.mine_positions_text.includes(tile_pos_3)
+          ) {
+            let y = tile_pos_3.indexOf("y");
+            let x_pos = tile_pos_3.slice(1, y);
+            let y_pos = tile_pos_3.slice(y + 1);
+            this.clicked_tiles.push(tile_pos_3);
+            this.adjacentTileCheck(x_pos, y_pos);
+          }
+
+          if (
+            !this.clicked_tiles.includes(tile_pos_4) &&
+            !this.flagged_tiles.includes(tile_pos_4) &&
+            !this.mine_positions_text.includes(tile_pos_4)
+          ) {
+            let y = tile_pos_4.indexOf("y");
+            let x_pos = tile_pos_4.slice(1, y);
+            let y_pos = tile_pos_4.slice(y + 1);
+            this.clicked_tiles.push(tile_pos_4);
+            this.adjacentTileCheck(x_pos, y_pos);
+          }
+
+          if (
+            !this.clicked_tiles.includes(tile_pos_5) &&
+            !this.flagged_tiles.includes(tile_pos_5) &&
+            !this.mine_positions_text.includes(tile_pos_5)
+          ) {
+            let y = tile_pos_5.indexOf("y");
+            let x_pos = tile_pos_5.slice(1, y);
+            let y_pos = tile_pos_5.slice(y + 1);
+            this.clicked_tiles.push(tile_pos_5);
+            this.adjacentTileCheck(x_pos, y_pos);
+          }
+
+          if (
+            !this.clicked_tiles.includes(tile_pos_6) &&
+            !this.flagged_tiles.includes(tile_pos_6) &&
+            !this.mine_positions_text.includes(tile_pos_6)
+          ) {
+            let y = tile_pos_6.indexOf("y");
+            let x_pos = tile_pos_6.slice(1, y);
+            let y_pos = tile_pos_6.slice(y + 1);
+            this.clicked_tiles.push(tile_pos_6);
+            this.adjacentTileCheck(x_pos, y_pos);
+          }
+
+          if (
+            !this.clicked_tiles.includes(tile_pos_7) &&
+            !this.flagged_tiles.includes(tile_pos_7) &&
+            !this.mine_positions_text.includes(tile_pos_7)
+          ) {
+            let y = tile_pos_7.indexOf("y");
+            let x_pos = tile_pos_7.slice(1, y);
+            let y_pos = tile_pos_7.slice(y + 1);
+            this.clicked_tiles.push(tile_pos_7);
+            this.adjacentTileCheck(x_pos, y_pos);
+          }
+
+          if (
+            !this.clicked_tiles.includes(tile_pos_8) &&
+            !this.flagged_tiles.includes(tile_pos_8) &&
+            !this.mine_positions_text.includes(tile_pos_8)
+          ) {
+            let y = tile_pos_8.indexOf("y");
+            let x_pos = tile_pos_8.slice(1, y);
+            let y_pos = tile_pos_8.slice(y + 1);
+            this.clicked_tiles.push(tile_pos_8);
+            this.adjacentTileCheck(x_pos, y_pos);
+          }
+        }
+      }
     },
 
     tileRightClick: function (index1, index2, e) {
@@ -139,6 +267,9 @@ var app = new Vue({
     tileCovered: function (index1, index2) {
       let tile_pos = `x${index1 + 1}y${index2 + 1}`;
       if (!this.clicked_tiles.includes(tile_pos)) {
+        if (!this.covered_tiles.includes(tile_pos)) {
+          this.covered_tiles.push(tile_pos);
+        }
         return true;
       }
     },
@@ -155,6 +286,7 @@ var app = new Vue({
       this.clicked_tiles = [];
       this.flagged_tiles = [];
       this.number_tiles = [];
+      this.covered_tiles = [];
       this.mine_positions_text = "";
       this.generateMines();
       this.populateTileWithMine();
