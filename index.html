@@ -6,7 +6,7 @@
   </head>
   <body>
     <div id="app">
-      <div class="board-background">
+      <div class="board-background" @contextmenu="preventRightClick($event)">
         <div v-for="(width, index1) in width_of_board">
           <div
             class="tile-background"

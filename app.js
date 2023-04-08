@@ -22,8 +22,8 @@ var app = new Vue({
       } else {
         return;
       }
-      console.log(`clicked tiles: ${this.clicked_tiles}`);
-      console.log(`clicked tile: ${tile_clicked}`);
+      // if (this.number_tiles.includes(tile.clicked)) {
+      // }
 
       let tile_x = index1 + 1;
       let tile_y = index2 + 1;
@@ -32,11 +32,17 @@ var app = new Vue({
     },
 
     adjacentTileCheck: function (tile_x, tile_y) {
+      let index1 = tile_x - 1;
+      let index2 = tile_y - 1;
       if (
         tile_x >= 0 &&
         tile_x <= this.width_of_board &&
         tile_y >= 0 &&
-        tile_y <= this.height_of_board
+        tile_y <= this.height_of_board &&
+        tile_x - 1 >= 0 &&
+        tile_y - 1 >= 0 &&
+        tile_x + 1 <= this.width_of_board &&
+        tile_y + 1 <= this.height_of_board
       ) {
         let tile_pos = `x${tile_x}y${tile_y}`;
         if (
@@ -54,100 +60,29 @@ var app = new Vue({
           let tile_pos_7 = `x${tile_x}y${tile_y + 1}`;
           let tile_pos_8 = `x${tile_x + 1}y${tile_y + 1}`;
 
-          if (
-            !this.clicked_tiles.includes(tile_pos_1) &&
-            !this.flagged_tiles.includes(tile_pos_1) &&
-            !this.mine_positions_text.includes(tile_pos_1)
-          ) {
-            let y = tile_pos_1.indexOf("y");
-            let x_pos = +tile_pos_1.slice(1, y);
-            let y_pos = +tile_pos_1.slice(y + 1);
-            this.clicked_tiles.push(tile_pos_1);
-            this.adjacentTileCheck(x_pos, y_pos);
-          }
+          let tile_pos_array = [
+            tile_pos_1,
+            tile_pos_2,
+            tile_pos_3,
+            tile_pos_4,
+            tile_pos_5,
+            tile_pos_6,
+            tile_pos_7,
+            tile_pos_8,
+          ];
 
-          if (
-            !this.clicked_tiles.includes(tile_pos_2) &&
-            !this.flagged_tiles.includes(tile_pos_2) &&
-            !this.mine_positions_text.includes(tile_pos_2)
-          ) {
-            let y = tile_pos_2.indexOf("y");
-            let x_pos = +tile_pos_2.slice(1, y);
-            let y_pos = +tile_pos_2.slice(y + 1);
-            this.clicked_tiles.push(tile_pos_2);
-            this.adjacentTileCheck(x_pos, y_pos);
-          }
-
-          if (
-            !this.clicked_tiles.includes(tile_pos_3) &&
-            !this.flagged_tiles.includes(tile_pos_3) &&
-            !this.mine_positions_text.includes(tile_pos_3)
-          ) {
-            let y = tile_pos_3.indexOf("y");
-            let x_pos = +tile_pos_3.slice(1, y);
-            let y_pos = +tile_pos_3.slice(y + 1);
-            this.clicked_tiles.push(tile_pos_3);
-            this.adjacentTileCheck(x_pos, y_pos);
-          }
-
-          if (
-            !this.clicked_tiles.includes(tile_pos_4) &&
-            !this.flagged_tiles.includes(tile_pos_4) &&
-            !this.mine_positions_text.includes(tile_pos_4)
-          ) {
-            let y = tile_pos_4.indexOf("y");
-            let x_pos = +tile_pos_4.slice(1, y);
-            let y_pos = +tile_pos_4.slice(y + 1);
-            this.clicked_tiles.push(tile_pos_4);
-            this.adjacentTileCheck(x_pos, y_pos);
-          }
-
-          if (
-            !this.clicked_tiles.includes(tile_pos_5) &&
-            !this.flagged_tiles.includes(tile_pos_5) &&
-            !this.mine_positions_text.includes(tile_pos_5)
-          ) {
-            let y = tile_pos_5.indexOf("y");
-            let x_pos = +tile_pos_5.slice(1, y);
-            let y_pos = +tile_pos_5.slice(y + 1);
-            this.clicked_tiles.push(tile_pos_5);
-            this.adjacentTileCheck(x_pos, y_pos);
-          }
-
-          if (
-            !this.clicked_tiles.includes(tile_pos_6) &&
-            !this.flagged_tiles.includes(tile_pos_6) &&
-            !this.mine_positions_text.includes(tile_pos_6)
-          ) {
-            let y = tile_pos_6.indexOf("y");
-            let x_pos = +tile_pos_6.slice(1, y);
-            let y_pos = +tile_pos_6.slice(y + 1);
-            this.clicked_tiles.push(tile_pos_6);
-            this.adjacentTileCheck(x_pos, y_pos);
-          }
-
-          if (
-            !this.clicked_tiles.includes(tile_pos_7) &&
-            !this.flagged_tiles.includes(tile_pos_7) &&
-            !this.mine_positions_text.includes(tile_pos_7)
-          ) {
-            let y = tile_pos_7.indexOf("y");
-            let x_pos = +tile_pos_7.slice(1, y);
-            let y_pos = +tile_pos_7.slice(y + 1);
-            this.clicked_tiles.push(tile_pos_7);
-            this.adjacentTileCheck(x_pos, y_pos);
-          }
-
-          if (
-            !this.clicked_tiles.includes(tile_pos_8) &&
-            !this.flagged_tiles.includes(tile_pos_8) &&
-            !this.mine_positions_text.includes(tile_pos_8)
-          ) {
-            let y = tile_pos_8.indexOf("y");
-            let x_pos = +tile_pos_8.slice(1, y);
-            let y_pos = +tile_pos_8.slice(y + 1);
-            this.clicked_tiles.push(tile_pos_8);
-            this.adjacentTileCheck(x_pos, y_pos);
+          for (let i = 0; i < tile_pos_array.length; i++) {
+            if (
+              !this.clicked_tiles.includes(tile_pos_array[i]) &&
+              !this.flagged_tiles.includes(tile_pos_array[i]) &&
+              !this.mine_positions_text.includes(tile_pos_array[i])
+            ) {
+              let y = tile_pos_array[i].indexOf("y");
+              let x_pos = +tile_pos_array[i].slice(1, y);
+              let y_pos = +tile_pos_array[i].slice(y + 1);
+              this.clicked_tiles.push(tile_pos_array[i]);
+              this.adjacentTileCheck(x_pos, y_pos);
+            }
           }
         }
       }
@@ -164,6 +99,10 @@ var app = new Vue({
         this.flagged_tiles.splice(existingFlag, 1);
       }
       console.log(`flagged tiles: ${this.flagged_tiles}`);
+    },
+
+    preventRightClick(e) {
+      e.preventDefault();
     },
 
     generateMines: function () {
@@ -234,31 +173,23 @@ var app = new Vue({
       let tile_pos_7 = `x${tile_x}y${tile_y + 1}`;
       let tile_pos_8 = `x${tile_x + 1}y${tile_y + 1}`;
 
-      if (this.mine_positions_text.includes(tile_pos_1)) {
-        adjacent_mines++;
+      var tile_pos_array = [
+        tile_pos_1,
+        tile_pos_2,
+        tile_pos_3,
+        tile_pos_4,
+        tile_pos_5,
+        tile_pos_6,
+        tile_pos_7,
+        tile_pos_8,
+      ];
+
+      for (let i = 0; i < tile_pos_array.length; i++) {
+        if (this.mine_positions_text.includes(tile_pos_array[i])) {
+          adjacent_mines++;
+        }
       }
-      if (this.mine_positions_text.includes(tile_pos_2)) {
-        adjacent_mines++;
-      }
-      if (this.mine_positions_text.includes(tile_pos_3)) {
-        adjacent_mines++;
-      }
-      if (this.mine_positions_text.includes(tile_pos_4)) {
-        adjacent_mines++;
-      }
-      if (this.mine_positions_text.includes(tile_pos_5)) {
-        adjacent_mines++;
-      }
-      if (this.mine_positions_text.includes(tile_pos_6)) {
-        adjacent_mines++;
-      }
-      if (this.mine_positions_text.includes(tile_pos_7)) {
-        adjacent_mines++;
-      }
-      if (this.mine_positions_text.includes(tile_pos_8)) {
-        adjacent_mines++;
-      }
-      // console.log(`tile ${tile_pos} has ${adjacent_mines} adjacent mines`);
+
       if (adjacent_mines > 0) {
         if (!this.number_tiles.includes(tile_pos)) {
           this.number_tiles.push(tile_pos);
@@ -297,6 +228,3 @@ var app = new Vue({
     },
   },
 });
-
-// example of what mine_positions should look like
-// mine_positions = [ 1: { width: 0, height: 0 } ];
