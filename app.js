@@ -19,8 +19,11 @@ var app = new Vue({
         !this.flagged_tiles.includes(tile_clicked)
       ) {
         this.clicked_tiles.push(tile_clicked);
+      } else {
+        return;
       }
       console.log(`clicked tiles: ${this.clicked_tiles}`);
+      console.log(`clicked tile: ${tile_clicked}`);
 
       let tile_x = index1 + 1;
       let tile_y = index2 + 1;
@@ -57,8 +60,8 @@ var app = new Vue({
             !this.mine_positions_text.includes(tile_pos_1)
           ) {
             let y = tile_pos_1.indexOf("y");
-            let x_pos = tile_pos_1.slice(1, y);
-            let y_pos = tile_pos_1.slice(y + 1);
+            let x_pos = +tile_pos_1.slice(1, y);
+            let y_pos = +tile_pos_1.slice(y + 1);
             this.clicked_tiles.push(tile_pos_1);
             this.adjacentTileCheck(x_pos, y_pos);
           }
@@ -69,8 +72,8 @@ var app = new Vue({
             !this.mine_positions_text.includes(tile_pos_2)
           ) {
             let y = tile_pos_2.indexOf("y");
-            let x_pos = tile_pos_2.slice(1, y);
-            let y_pos = tile_pos_2.slice(y + 1);
+            let x_pos = +tile_pos_2.slice(1, y);
+            let y_pos = +tile_pos_2.slice(y + 1);
             this.clicked_tiles.push(tile_pos_2);
             this.adjacentTileCheck(x_pos, y_pos);
           }
@@ -81,8 +84,8 @@ var app = new Vue({
             !this.mine_positions_text.includes(tile_pos_3)
           ) {
             let y = tile_pos_3.indexOf("y");
-            let x_pos = tile_pos_3.slice(1, y);
-            let y_pos = tile_pos_3.slice(y + 1);
+            let x_pos = +tile_pos_3.slice(1, y);
+            let y_pos = +tile_pos_3.slice(y + 1);
             this.clicked_tiles.push(tile_pos_3);
             this.adjacentTileCheck(x_pos, y_pos);
           }
@@ -93,8 +96,8 @@ var app = new Vue({
             !this.mine_positions_text.includes(tile_pos_4)
           ) {
             let y = tile_pos_4.indexOf("y");
-            let x_pos = tile_pos_4.slice(1, y);
-            let y_pos = tile_pos_4.slice(y + 1);
+            let x_pos = +tile_pos_4.slice(1, y);
+            let y_pos = +tile_pos_4.slice(y + 1);
             this.clicked_tiles.push(tile_pos_4);
             this.adjacentTileCheck(x_pos, y_pos);
           }
@@ -105,8 +108,8 @@ var app = new Vue({
             !this.mine_positions_text.includes(tile_pos_5)
           ) {
             let y = tile_pos_5.indexOf("y");
-            let x_pos = tile_pos_5.slice(1, y);
-            let y_pos = tile_pos_5.slice(y + 1);
+            let x_pos = +tile_pos_5.slice(1, y);
+            let y_pos = +tile_pos_5.slice(y + 1);
             this.clicked_tiles.push(tile_pos_5);
             this.adjacentTileCheck(x_pos, y_pos);
           }
@@ -117,8 +120,8 @@ var app = new Vue({
             !this.mine_positions_text.includes(tile_pos_6)
           ) {
             let y = tile_pos_6.indexOf("y");
-            let x_pos = tile_pos_6.slice(1, y);
-            let y_pos = tile_pos_6.slice(y + 1);
+            let x_pos = +tile_pos_6.slice(1, y);
+            let y_pos = +tile_pos_6.slice(y + 1);
             this.clicked_tiles.push(tile_pos_6);
             this.adjacentTileCheck(x_pos, y_pos);
           }
@@ -129,8 +132,8 @@ var app = new Vue({
             !this.mine_positions_text.includes(tile_pos_7)
           ) {
             let y = tile_pos_7.indexOf("y");
-            let x_pos = tile_pos_7.slice(1, y);
-            let y_pos = tile_pos_7.slice(y + 1);
+            let x_pos = +tile_pos_7.slice(1, y);
+            let y_pos = +tile_pos_7.slice(y + 1);
             this.clicked_tiles.push(tile_pos_7);
             this.adjacentTileCheck(x_pos, y_pos);
           }
@@ -141,8 +144,8 @@ var app = new Vue({
             !this.mine_positions_text.includes(tile_pos_8)
           ) {
             let y = tile_pos_8.indexOf("y");
-            let x_pos = tile_pos_8.slice(1, y);
-            let y_pos = tile_pos_8.slice(y + 1);
+            let x_pos = +tile_pos_8.slice(1, y);
+            let y_pos = +tile_pos_8.slice(y + 1);
             this.clicked_tiles.push(tile_pos_8);
             this.adjacentTileCheck(x_pos, y_pos);
           }
