@@ -10,10 +10,14 @@ var app = new Vue({
     flagged_tiles: [],
     number_tiles: [],
     covered_tiles: [],
+    win_lose_text: "",
   },
   methods: {
     tileClick: function (index1, index2) {
       let tile_clicked = `x${index1 + 1}y${index2 + 1}`;
+      if (this.mine_positions_text.includes(tile_clicked)) {
+        win_lose_text = "YOU LOST";
+      }
       if (
         !this.clicked_tiles.includes(tile_clicked) &&
         !this.flagged_tiles.includes(tile_clicked)
@@ -31,9 +35,43 @@ var app = new Vue({
       this.adjacentTileCheck(tile_x, tile_y);
     },
 
+    tileDoubleClick: function (index1, index2) {
+      let tile_x = index1;
+      let tile_y = index2;
+
+      let tile_pos_1 = `x${tile_x - 1}y${tile_y - 1}`;
+      let tile_pos_2 = `x${tile_x}y${tile_y - 1}`;
+      let tile_pos_3 = `x${tile_x + 1}y${tile_y - 1}`;
+
+      let tile_pos_4 = `x${tile_x - 1}y${tile_y}`;
+      let tile_pos_5 = `x${tile_x + 1}y${tile_y}`;
+
+      let tile_pos_6 = `x${tile_x - 1}y${tile_y + 1}`;
+      let tile_pos_7 = `x${tile_x}y${tile_y + 1}`;
+      let tile_pos_8 = `x${tile_x + 1}y${tile_y + 1}`;
+
+      var tile_pos_array = [
+        tile_pos_1,
+        tile_pos_2,
+        tile_pos_3,
+        tile_pos_4,
+        tile_pos_5,
+        tile_pos_6,
+        tile_pos_7,
+        tile_pos_8,
+      ];
+
+      for (let i = 0; i < tile_pos_array.length; i++) {
+        if (!this.flagged_tiles.includes(tile_pos_array[i])) {
+          let y = tile_pos_array[i].indexOf("y");
+          let x_pos = +tile_pos_array[i].slice(1, y);
+          let y_pos = +tile_pos_array[i].slice(y + 1);
+          this.tileClick(x_pos, y_pos);
+        }
+      }
+    },
+
     adjacentTileCheck: function (tile_x, tile_y) {
-      let index1 = tile_x - 1;
-      let index2 = tile_y - 1;
       if (
         tile_x >= 0 &&
         tile_x <= this.width_of_board &&
@@ -222,6 +260,7 @@ var app = new Vue({
       this.number_tiles = [];
       this.covered_tiles = [];
       this.mine_positions_text = "";
+      this.win_lose_text = "";
       this.generateMines();
       this.populateTileWithMine();
       this.populateTileWithNumber();
