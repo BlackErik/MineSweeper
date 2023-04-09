@@ -1,3 +1,9 @@
+.win-lose-text {
+  text-align: center;
+  font-size: 3rem;
+  color: red;
+}
+
 .board-background {
   background-color: grey;
   height: 450px;

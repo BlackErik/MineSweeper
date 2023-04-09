@@ -1,9 +1,9 @@
 var app = new Vue({
   el: "#app",
   data: {
-    height_of_board: 15,
-    width_of_board: 15,
-    num_of_mines: 30,
+    height_of_board: 5,
+    width_of_board: 5,
+    num_of_mines: 1,
     mine_positions: [],
     mine_positions_text: "",
     clicked_tiles: [],
@@ -16,7 +16,7 @@ var app = new Vue({
     tileClick: function (index1, index2) {
       let tile_clicked = `x${index1 + 1}y${index2 + 1}`;
       if (this.mine_positions_text.includes(tile_clicked)) {
-        win_lose_text = "YOU LOST";
+        this.win_lose_text = "YOU LOST";
       }
       if (
         !this.clicked_tiles.includes(tile_clicked) &&
