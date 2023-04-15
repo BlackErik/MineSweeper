@@ -22,8 +22,6 @@ var app = new Vue({
       } else {
         return;
       }
-      // if (this.number_tiles.includes(tile.clicked)) {
-      // }
 
       let tile_x = index1 + 1;
       let tile_y = index2 + 1;
@@ -32,17 +30,17 @@ var app = new Vue({
     },
 
     adjacentTileCheck: function (tile_x, tile_y) {
-      let index1 = tile_x - 1;
-      let index2 = tile_y - 1;
+      // let index1 = tile_x - 1;
+      // let index2 = tile_y - 1;
       if (
         tile_x >= 0 &&
-        tile_x <= this.width_of_board &&
+        tile_x <= this.width_of_board + 1 &&
         tile_y >= 0 &&
-        tile_y <= this.height_of_board &&
+        tile_y <= this.height_of_board + 1 &&
         tile_x - 1 >= 0 &&
         tile_y - 1 >= 0 &&
-        tile_x + 1 <= this.width_of_board &&
-        tile_y + 1 <= this.height_of_board
+        tile_x + 1 <= this.width_of_board + 1 &&
+        tile_y + 1 <= this.height_of_board + 1
       ) {
         let tile_pos = `x${tile_x}y${tile_y}`;
         if (
@@ -90,7 +88,6 @@ var app = new Vue({
 
     tileRightClick: function (index1, index2, e) {
       e.preventDefault();
-      console.log("rightclicked");
       let tile_flagged = `x${index1 + 1}y${index2 + 1}`;
       if (!this.flagged_tiles.includes(tile_flagged)) {
         this.flagged_tiles.push(tile_flagged);
@@ -98,7 +95,6 @@ var app = new Vue({
         let existingFlag = this.flagged_tiles.indexOf(tile_flagged);
         this.flagged_tiles.splice(existingFlag, 1);
       }
-      console.log(`flagged tiles: ${this.flagged_tiles}`);
     },
 
     preventRightClick(e) {
@@ -113,7 +109,6 @@ var app = new Vue({
         let width = Math.floor(Math.random() * this.width_of_board) + 1;
         let height = Math.floor(Math.random() * this.height_of_board) + 1;
         mine = `x${width}y${height}`;
-        console.log("mine " + mine);
         if (mines.length != 0) {
           if (mines.includes(mine)) {
             console.log("this mine is equal to an already created mine");
@@ -126,7 +121,6 @@ var app = new Vue({
           i++;
         }
       }
-      console.log(`mines: ${mines}`);
       for (i in mines) {
         let y = mines[i].indexOf("y");
         var x_pos = mines[i].slice(1, y);
