@@ -3,7 +3,7 @@ var app = new Vue({
   data: {
     height_of_board: 15,
     width_of_board: 15,
-    num_of_mines: 30,
+    num_of_mines: 15,
     mine_positions: [],
     mine_positions_text: "",
     clicked_tiles: [],
