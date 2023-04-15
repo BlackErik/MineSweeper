@@ -58,6 +58,21 @@
   cursor: pointer;
 }
 
+.ui-top {
+  display: flex;
+  justify-content: space-around;
+}
+
+.flagged-mine-count {
+  text-align: center;
+  font-size: 1rem;
+}
+
+.actual-mine-count {
+  text-align: center;
+  font-size: 1rem;
+}
+
 #button-container {
   margin-top: 20px;
   display: flex;

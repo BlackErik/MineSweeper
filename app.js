@@ -3,7 +3,7 @@ var app = new Vue({
   data: {
     height_of_board: 15,
     width_of_board: 15,
-    num_of_mines: 40,
+    num_of_mines: 30,
     mine_positions: [],
     mine_positions_text: "",
     clicked_tiles: [],
@@ -11,6 +11,7 @@ var app = new Vue({
     number_tiles: [],
     covered_tiles: [],
     win_lose_text: "",
+    flagged_mines: 0,
   },
   methods: {
     tileClick: function (index1, index2) {
@@ -134,9 +135,11 @@ var app = new Vue({
       let tile_flagged = `x${index1 + 1}y${index2 + 1}`;
       if (!this.flagged_tiles.includes(tile_flagged)) {
         this.flagged_tiles.push(tile_flagged);
+        this.flagged_mines++;
       } else {
         let existingFlag = this.flagged_tiles.indexOf(tile_flagged);
         this.flagged_tiles.splice(existingFlag, 1);
+        this.flagged_mines--;
       }
     },
 
@@ -260,6 +263,7 @@ var app = new Vue({
       this.covered_tiles = [];
       this.mine_positions_text = "";
       this.win_lose_text = "";
+      this.flagged_mines = 0;
       this.generateMines();
       this.populateTileWithMine();
       this.populateTileWithNumber();
