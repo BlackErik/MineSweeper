@@ -12,9 +12,7 @@
         <h3 class="actual-mine-count">
           Number of Mines: {{mine_positions.length}}
         </h3>
-        <h3 class="flagged-mine-count">
-          Possible Found Mines: {{flagged_mines}}
-        </h3>
+        <h3 class="flagged-mine-count">Flags Used: {{flagged_mines}}</h3>
       </div>
       <div class="board-background" @contextmenu="preventRightClick($event)">
         <div v-for="(width, index1) in width_of_board">

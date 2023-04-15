@@ -21,6 +21,11 @@ var app = new Vue({
         !this.flagged_tiles.includes(tile_clicked)
       ) {
         this.clicked_tiles.push(tile_clicked);
+        let index = this.covered_tiles.indexOf(tile_clicked);
+        this.covered_tiles.splice(index, 1);
+
+        this.winCheck();
+
         if (this.mine_positions_text.includes(tile_clicked)) {
           this.win_lose_text = "YOU LOST";
         }
@@ -30,9 +35,6 @@ var app = new Vue({
 
       let tile_x = index1 + 1;
       let tile_y = index2 + 1;
-
-      console.log(`tile clicked: ${tile_clicked}`);
-      console.log(`clicked_tiles ${this.clicked_tiles}`);
 
       this.adjacentTileCheck(tile_x, tile_y);
     },
@@ -68,14 +70,13 @@ var app = new Vue({
           let y = tile_pos_array[i].indexOf("y");
           let x_pos = +tile_pos_array[i].slice(1, y);
           let y_pos = +tile_pos_array[i].slice(y + 1);
+
           this.tileClick(x_pos, y_pos);
         }
       }
     },
 
     adjacentTileCheck: function (tile_x, tile_y) {
-      // let index1 = tile_x - 1;
-      // let index2 = tile_y - 1;
       if (
         tile_x >= 0 &&
         tile_x <= this.width_of_board + 1 &&
@@ -122,12 +123,18 @@ var app = new Vue({
               let y = tile_pos_array[i].indexOf("y");
               let x_pos = +tile_pos_array[i].slice(1, y);
               let y_pos = +tile_pos_array[i].slice(y + 1);
+
+              let index = this.covered_tiles.indexOf(tile_pos_array[i]);
+              this.covered_tiles.splice(index, 1);
+
               this.clicked_tiles.push(tile_pos_array[i]);
+
               this.adjacentTileCheck(x_pos, y_pos);
             }
           }
         }
       }
+      this.winCheck();
     },
 
     tileRightClick: function (index1, index2, e) {
@@ -141,6 +148,7 @@ var app = new Vue({
         this.flagged_tiles.splice(existingFlag, 1);
         this.flagged_mines--;
       }
+      this.winCheck();
     },
 
     preventRightClick(e) {
@@ -252,6 +260,27 @@ var app = new Vue({
       let tile_pos = `x${index1 + 1}y${index2 + 1}`;
       if (this.flagged_tiles.includes(tile_pos)) {
         return true;
+      }
+    },
+
+    winCheck: function () {
+      var x = [...this.mine_positions_text];
+      var y = [...this.covered_tiles];
+
+      var count = 0;
+
+      for (let i = 0; i < x.length; i++) {
+        if (x.length === y.length) {
+          console.log("first check worked");
+          if (x.includes(y[i])) {
+            count++;
+            console.log(count);
+            if (count == x.length) {
+              console.log("these arrays must be the same");
+              this.win_lose_text = "YOU WIN";
+            }
+          }
+        }
       }
     },
 

@@ -2,6 +2,8 @@
 
 TODO :
 
+revise winCheck, sometimes needing to right click last tile in order to check if you won
+
 not being able to flag numbers
 
 user inputted board layout
