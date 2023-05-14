@@ -1,9 +1,13 @@
 var app = new Vue({
   el: "#app",
   data: {
-    height_of_board: 15,
-    width_of_board: 15,
-    num_of_mines: 15,
+    // easy: 9x9 10m
+    // medium: 16x16 40m
+    // hard: 30x16 99m
+    // extreme: 30x24 160m
+    height_of_board: 9,
+    width_of_board: 9,
+    num_of_mines: 10,
     mine_positions: [],
     mine_positions_text: "",
     clicked_tiles: [],
@@ -12,8 +16,28 @@ var app = new Vue({
     covered_tiles: [],
     win_lose_text: "",
     flagged_mines: 0,
+    initial_click: true,
   },
   methods: {
+    firstClick: function (index1, index2) {
+      if (this.initial_click === true) {
+        console.log("this is the initial click");
+        let tile_clicked = `x${index1 + 1}y${index2 + 1}`;
+
+        this.tileClick(index1, index2);
+        if (
+          this.mine_positions_text.includes(tile_clicked) ||
+          this.clicked_tiles.length < 9
+        ) {
+          this.startOverFirstClick(index1, index2);
+          this.firstClick(index1, index2);
+        } else {
+          this.initial_click = false;
+        }
+      }
+      console.log("this is not the first click");
+    },
+
     tileClick: function (index1, index2) {
       let tile_clicked = `x${index1 + 1}y${index2 + 1}`;
       if (
@@ -285,6 +309,21 @@ var app = new Vue({
     },
 
     startGame: function () {
+      this.mine_positions = [];
+      this.clicked_tiles = [];
+      this.flagged_tiles = [];
+      this.number_tiles = [];
+      this.covered_tiles = [];
+      this.mine_positions_text = "";
+      this.win_lose_text = "";
+      this.flagged_mines = 0;
+      this.generateMines();
+      this.populateTileWithMine();
+      this.populateTileWithNumber();
+      this.initial_click = true;
+    },
+
+    startOverFirstClick: function (index1, index2) {
       this.mine_positions = [];
       this.clicked_tiles = [];
       this.flagged_tiles = [];
