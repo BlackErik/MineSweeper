@@ -12,6 +12,8 @@ timer
 
 actual game logic
 
-fix initial click sometimes uncovering whole board besides mines
+fix lag
+
+fix double clicking not uncovering the number 3
 
 styling

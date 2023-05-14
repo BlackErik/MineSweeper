@@ -8,6 +8,12 @@
     <div id="app">
       <h1 class="win-lose-text">{{win_lose_text}}</h1>
 
+      <div id="difficulty-container">
+        <button @click="easyMode()">Easy</button>
+        <button @click="mediumMode()">Medium</button>
+        <button @click="hardMode()">Hard</button>
+        <button @click="extremeMode()">Extreme</button>
+      </div>
       <div class="ui-top">
         <h3 class="actual-mine-count">
           Number of Mines: {{mine_positions.length}}
@@ -31,9 +37,6 @@
             <div class="flag" v-if="tileFlagged(index1,index2)"></div>
           </div>
         </div>
-      </div>
-      <div id="button-container">
-        <button @click="startGame()">Start Game</button>
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>

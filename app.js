@@ -19,9 +19,32 @@ var app = new Vue({
     initial_click: true,
   },
   methods: {
+    easyMode() {
+      this.height_of_board = 9;
+      this.width_of_board = 9;
+      this.num_of_mines = 10;
+      this.startGame();
+    },
+    mediumMode() {
+      this.height_of_board = 16;
+      this.width_of_board = 16;
+      this.num_of_mines = 40;
+      this.startGame();
+    },
+    hardMode() {
+      this.height_of_board = 30;
+      this.width_of_board = 16;
+      this.num_of_mines = 99;
+      this.startGame();
+    },
+    extremeMode() {
+      this.height_of_board = 30;
+      this.width_of_board = 24;
+      this.num_of_mines = 160;
+      this.startGame();
+    },
     firstClick: function (index1, index2) {
       if (this.initial_click === true) {
-        console.log("this is the initial click");
         let tile_clicked = `x${index1 + 1}y${index2 + 1}`;
 
         this.tileClick(index1, index2);
@@ -35,7 +58,6 @@ var app = new Vue({
           this.initial_click = false;
         }
       }
-      console.log("this is not the first click");
     },
 
     tileClick: function (index1, index2) {
@@ -189,7 +211,6 @@ var app = new Vue({
         mine = `x${width}y${height}`;
         if (mines.length != 0) {
           if (mines.includes(mine)) {
-            console.log("this mine is equal to an already created mine");
           } else {
             mines.push(mine);
             i++;
@@ -295,12 +316,9 @@ var app = new Vue({
 
       for (let i = 0; i < x.length; i++) {
         if (x.length === y.length) {
-          console.log("first check worked");
           if (x.includes(y[i])) {
             count++;
-            console.log(count);
             if (count == x.length) {
-              console.log("these arrays must be the same");
               this.win_lose_text = "YOU WIN";
             }
           }
